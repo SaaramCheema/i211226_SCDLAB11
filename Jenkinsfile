@@ -3,26 +3,29 @@ pipeline {
     agent any
    
     stages {
-         stage('Checkout') {
+         stage('install') {
+          steps {
+              sh 'npm install'
+            }
+          }
+          stage('build') {
+          steps {
+              sh 'npm run build'
+            }
+          }
+       
+          stage('Docker Image') {
+          steps {
+              sh 'echo docker_build_-t_SCDLABTASK11'
+            }
+          }
+       
+        stage('Docker Compose Up') {
             steps {
-                git 'https://github.com/SaaramCheema/i211226_SCDLAB11'
-            }
-        }
-        stage('Dependency Installation') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Build Docker Image') {
-        steps {
-                sh 'echo docker build -t your-image-name .'
-            }
-        }
-        stage('Push Docker Image') {
-        steps {
-                sh 'echo docker push your-registry/your-image-name'
+               
+                    sh "echo docker_compose_up"
+               
             }
         }
     }
 }
-
